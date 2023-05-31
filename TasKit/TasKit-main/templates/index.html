@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2><span id="greeting"></span>, {{ user }}!</h2>
+<br>
+<h3>Tasks ✔</h3>
+<br>
+<div id="tasks-section">
+
+    {% for task in tasks %}
+    <div class="checkbox-animated">
+        <input class="checkbox-input" id="{{ task['_id'] }}" type="checkbox">
+        <label for="{{ task['_id'] }}">
+            <span class="check"></span>
+            <span class="box"></span>
+            {{ task['content'] }}
+        </label>
+    </div>
+    {% endfor %}
+
+</div>
+
+<div id="my-form" class="form" style="display: none;">
+    <div class="form-group row">
+        <div class="col-lg-8">
+            <input type="text" name="newTask" class="form-control" id="newTask" placeholder="Enter your task" required>
+        </div>
+        <button id="task-add-button" style="margin-right: 1%;" class="btn btn-success">Add</button>
+        <button style="margin-right: 1%;" class="btn btn-danger" onclick="hideForm()"><i
+                class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div style="display: none;" id="no-task-indicator"><span style="font-size: larger;">You don't have any task to do!</span></div>
+
+<br><br>
+<button class="task-buttons btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add a new task"
+    onclick="showForm()"><i class="fas fa-plus"></i></button>
+<button class="task-buttons btn" style="background-color:green;color: #fff;" data-toggle="tooltip"
+    data-placement="bottom" title="Mark all as done" onclick="clearAllTasks()"><i class="fas fa-check"></i></button>
+<br><br>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
